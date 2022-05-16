@@ -1,0 +1,36 @@
+ASSIGNMENT1
+ReplicaSet  contains matchLabels field under the selector
+
+ASSIGNMENT2
+
+[root@ip-172-31-31-236 04-controllers]# kubectl apply -f kubia-replicaset.yaml
+replicaset.apps/kubia created
+
+[root@ip-172-31-31-236 04-controllers]# kubectl get po
+NAME           READY   STATUS    RESTARTS   AGE
+kubia-5qpvc    1/1     Running   0          45s
+kubia-dp2n6    1/1     Running   0          45s
+kubia-manual   1/1     Running   0          4d2h
+kubia-qlfcq    1/1     Running   0          45s
+kubia2-4d5vj   1/1     Running   0          3h32m
+kubia2-tn5sl   1/1     Running   0          3h32m
+kubia2-v8gls   1/1     Running   0          3h32m
+nginx-nihir    1/1     Running   0          4d3h
+ngnix-yellow   1/1     Running   0          4d3h
+
+ASSIGNMENT3
+kubectl get rs
+kubectl scale replicaset --replicas=<n> <replicasetname>
+
+ASSIGNMENT4
+root@ip-172-31-31-236 05-services]# kubectl get svc
+NAME         TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1     <none>        443/TCP   5d2h
+kubia2       ClusterIP   10.99.10.99   <none>        80/TCP    49m
+
+[root@ip-172-31-31-236 05-services]# curl 10.99.10.99
+You've hit kubia2-v8gls
+[root@ip-172-31-31-236 05-services]#
+
+ASSIGNMENT5
+
