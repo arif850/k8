@@ -33,4 +33,39 @@ You've hit kubia2-v8gls
 [root@ip-172-31-31-236 05-services]#
 
 ASSIGNMENT5
+When changed labels  new pods got created with new labels,  yes when ran service i.e curl I.P got output  You've hit ... poiting to existing pod with label app=kubia 
+
+[root@ip-172-31-31-236 05-services]# kubectl get pods --show-labels
+NAME                                               READY   STATUS      RESTARTS   AGE     LABELS
+batch-job-every-fifteen-minutes-1652720400-g5brl   0/1     Completed   0          32m     app=periodic-batch-job,controller-uid=f368cb4c-ac6d-4dc7-b0ab-577b89d9994b,job-name=batch-job-every-fifteen-minutes-1652720400
+batch-job-every-fifteen-minutes-1652721300-6bzgj   0/1     Completed   0          17m     app=periodic-batch-job,controller-uid=21dfb77d-92ff-41a1-b91f-416db5276703,job-name=batch-job-every-fifteen-minutes-1652721300
+batch-job-every-fifteen-minutes-1652722200-mdbj7   0/1     Completed   0          2m36s   app=periodic-batch-job,controller-uid=1ed1f43a-ddca-4092-ba70-432f7fce8f9c,job-name=batch-job-every-fifteen-minutes-1652722200
+kubia-fgd7p                                        1/1     Running     0          78m     app=kubia
+kubia-gcgfv                                        1/1     Running     0          78m     app=kubia
+kubia-vtmjh                                        1/1     Running     0          78m     app=kubia
+
+
+[root@ip-172-31-31-236 05-services]# kubectl label po kubia-fgd7p kubia-gcgfv kubia-vtmjh  app=test --overwrite
+pod/kubia-fgd7p labeled
+pod/kubia-gcgfv labeled
+pod/kubia-vtmjh labeled
+
+[root@ip-172-31-31-236 05-services]# kubectl get pods --show-labels
+NAME                                               READY   STATUS      RESTARTS   AGE     LABELS
+batch-job-every-fifteen-minutes-1652720400-g5brl   0/1     Completed   0          36m     app=periodic-batch-job,controller-uid=f368cb4c-ac6d-4dc7-b0ab-577b89d9994b,job-name=batch-job-every-fifteen-minutes-1652720400
+batch-job-every-fifteen-minutes-1652721300-6bzgj   0/1     Completed   0          21m     app=periodic-batch-job,controller-uid=21dfb77d-92ff-41a1-b91f-416db5276703,job-name=batch-job-every-fifteen-minutes-1652721300
+batch-job-every-fifteen-minutes-1652722200-mdbj7   0/1     Completed   0          6m11s   app=periodic-batch-job,controller-uid=1ed1f43a-ddca-4092-ba70-432f7fce8f9c,job-name=batch-job-every-fifteen-minutes-1652722200
+kubia-fgd7p                                        1/1     Running     0          82m     app=test
+kubia-gcgfv                                        1/1     Running     0          82m     app=test
+kubia-nxnkg                                        1/1     Running     0          2m24s   app=kubia
+kubia-szqhb                                        1/1     Running     0          2m24s   app=kubia
+kubia-vtmjh                                        1/1     Running     0          82m     app=test
+kubia-x6bdh                                        1/1     Running     0          2m24s   app=kubia
+
+[root@ip-172-31-31-236 05-services]# curl 10.99.10.99
+You've hit kubia-nxnkg
+[root@ip-172-31-31-236 05-services]#
+
+
+
 
